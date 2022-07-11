@@ -28,7 +28,8 @@ elList.addEventListener("click", (evt)=> {
 
 
 const appendToDom = (array,node) => {
-    elList.innerHTML = ""
+    elList.innerHTML = "";
+    let count = 0;
     array.forEach((todo) => {
         let newItem = document.createElement("li");
         let newSpan = document.createElement("span");
@@ -41,9 +42,9 @@ const appendToDom = (array,node) => {
         newButton.dataset.todoId = todo.id; 
         newInput.dataset.todoId = todo.id; 
         allBtn.dataset.todoId = todo.id;    
-        allBtn.textContent = `All ${todo.id + 1}`
+        // allBtn.textContent = `All ${todo.id + 1}`
         allUncomplatedBtn.dataset.todoId = todo.id;    
-        allUncomplatedBtn.textContent = `Uncomplated ${todo.id + 1}`
+        // allUncomplatedBtn.textContent = `Uncomplated ${todo.id + 1}`
         newButton.setAttribute("class", "delete-btn");
         newInput.setAttribute("class", "js-input");
         newItem.setAttribute("class","li__box")
@@ -54,13 +55,12 @@ const appendToDom = (array,node) => {
 
         if(todo.isComplete) {
             newSpan.style.textDecoration = "line-through"
-            newInput.checked = true
+            newInput.checked = true;
+            count++;
         }
-        // if(allUncomplatedBtn >= allComplatedBtn) {
-        //     allUncomplatedBtn.textContent = `Uncomplated ${todo.id + 1}`
-        // } else {
-        //     allUncomplatedBtn.textContent = `Uncomplated ${todo.id - 1}`
-        // }
+        allBtn.textContent = array.length;
+        allComplatedBtn.textContent = count;
+        allUncomplatedBtn.textContent = array.length - count;
     })
 }
 
